@@ -12,7 +12,6 @@
         "strict": true
     },
     "exclude": [
-        "./dist/**/*",
-        "./postcss.config.js"
+        "./dist/**/*"
     ]
 }
