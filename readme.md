@@ -2,7 +2,7 @@
 
 This is the typescript version of Acode Plugin template 
 
-Read acode plugin [documentation](https://acode.app/plugin-docs) to develop plugin for acode editor.
+Read acode plugin [documentation](https://docs.acode.app/) to develop plugin for acode editor.
 
 ## Feature
 
