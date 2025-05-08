@@ -45,6 +45,54 @@ interface Input {
   onchange?: (event: Event) => void;
 }
 
+/**
+ * Options for a notification.
+ */
+interface NotificationOptions {
+  /**
+   * Icon for the notification, can be a URL or a base64 encoded image or icon class or svg string.
+   */
+  icon?: string;
+  /**
+   * Whether notification should auto close.
+   * @default true
+   */
+  autoClose?: boolean;
+  /**
+   * Action callback when notification is clicked.
+   * @default null
+   */
+  action?: (() => void) | null;
+  /**
+   * Type of notification.
+   * @default 'info'
+   */
+  type?: 'info' | 'warning' | 'error' | 'success';
+}
+
+interface FileInfo {
+  uri: string; // The URI or path to the file
+  name: string; // The file name
+  stats: FsStat;
+  readOnly: boolean;
+  options: Object;
+}
+
+/**
+ * Configuration for a file type handler.
+ */
+interface FileHandlerOptions {
+  /**
+   * File extensions to handle (without dots).
+   */
+  extensions: string[];
+  /**
+   * Async function to handle the file.
+   * This function will be called when a file with one of the specified extensions is opened.
+   */
+  handleFile: (fileInfo: FileInfo) => Promise<void>;
+}
+
 interface Acode {
   /**
    * Define a module
@@ -191,4 +239,38 @@ interface Acode {
   >;
 
   toInternalUrl(url: string): Promise<string>;
+
+  /**
+  * Installs an Acode plugin from registry
+  * @param pluginId id of the plugin to install
+  * @param installerPluginName Name of plugin attempting to install
+  * @returns {Promise<void>}
+  */
+  installPlugin(pluginId: string, installerPluginName: string): Promise<void>;
+
+  /**
+  * Push a notification
+  * @param title Title of the notification
+  * @param message Message body of the notification
+  * @param options Notification options
+  */
+  pushNotification(
+    title: string,
+    message: string,
+    options?: NotificationOptions
+  ): void;
+
+  /**
+  * Register a file type handler
+  * @param id - Unique identifier for the handler
+  * @param options - Handler options
+  * @throws {Error} If id is already registered or required options are missing
+  */
+  registerFileHandler(id: string, options: FileHandlerOptions): void;
+
+  /**
+  * Unregister a file type handler
+  * @param id The handler id to remove
+  */
+  unregisterFileHandler(id: string): void;
 }
