@@ -1,3 +1,4 @@
+import type { WCPage } from "acode/editor/page";
 import plugin from '../plugin.json';
 
 class AcodePlugin {

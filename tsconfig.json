@@ -9,7 +9,15 @@
         "removeComments": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        "strict": true
+        "strict": true,
+        "types": [
+            "@acode-app/types"
+        ],
+        "paths": {
+            "acode/*": [
+                "./node_modules/@acode-app/types/src/*"
+            ]
+        }
     },
     "exclude": [
         "./dist/**/*"
